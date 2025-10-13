@@ -1,0 +1,45 @@
+prefix : <http://mydb#>
+insert data {
+  :bob :joue :tennis, :foot ; :aime :cuisiner ; :vit :marseille .
+}
+
+
+prefix : <http://mydb#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+insert {
+  ?qui :est :Personne . ?ou :est :Ville .
+} where {
+  ?qui :vit ?ou .
+}
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://mydb#>
+select * where {
+  ?s :est ?t .
+}
+
+
+prefix : <http://mydb#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+insert data {
+  :vit rdfs:domain :Personne ; rdfs:range :Ville .
+  :joue rdfs:domain :Personne ; rdfs:range :Loisir .
+  :pres rdfs:domain :Ville ; rdfs:range :Ville .
+}
+
+
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://mydb#>
+insert {
+  ?x rdf:type ?t1 .
+  ?y rdf:type ?t2 .
+} where {
+  ?x ?r ?y .
+  ?r rdfs:domain ?t1 ; rdfs:range ?t2 .
+}
+
+SELECT * WHERE { 
+    ?s ?p ?o 
+} LIMIT 30
