@@ -32,3 +32,16 @@ for phrase in txt:
     db += [difference(phrase, sup)]
 
 print(db)
+
+def map(f, set):
+    r = []
+    for e in set:
+        r += [f(e)]
+    return r
+
+
+db_prefixed = []
+for e in db:
+    prefixe = map(lambda x: "http://sem.org#" + x, e)
+    db_prefixed += [prefixe]
+print(db_prefixed)

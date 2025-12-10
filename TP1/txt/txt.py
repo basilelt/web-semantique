@@ -88,23 +88,48 @@ def nettoyage(s):
     r = []
     for e in s:
         if e not in to_remove:
-            r.append(e)
+            r.append(e.lower())
+    return r
+
+
+#########
+## MAP ##
+#########
+def map(f, s):
+    r = []
+    for e in s:
+        r += [f(e)]
+    return r
+
+
+############
+## FILTER ##
+############
+def filter(p, t):
+    r = []
+    for e in t:
+        if p(e):
+            r += [e]
     return r
 
 
 if __name__ == "__main__":
-    # Load
     content = load("data.txt")
-    print(content)
-
-    # Split
     triplets = split(content)
-    print(triplets)
 
-    t_clean = []
+    db = []
     for triplet in triplets:
         if triplet == [""]:  # Skip empty triplets
             continue
-        t_clean.append(nettoyage(triplet))
+        db.append(nettoyage(triplet))
 
-    print(t_clean)
+    db_prefixed = []
+    for e in db:
+        prefixe = map(lambda x: "http://sem.org#" + x, e)
+        db_prefixed += [prefixe]
+
+    db_unprefixed = []
+    for e in db_prefixed:
+        unprefixe = map(lambda x: x.replace("http://sem.org#", ""), e)
+        db_unprefixed += [unprefixe]
+    print(db_unprefixed)
