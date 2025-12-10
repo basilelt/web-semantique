@@ -41,6 +41,25 @@ def map(f, s):
 
 
 prefix = map(lambda e: map(lambda x: "http://sem.org#" + x, e), db)
-
 unprefix = map(lambda e: map(lambda x: x.replace("http://sem.org#", ""), e), prefix)
-print(unprefix)
+
+# select ?x where { ?x ?y ?z . }
+# print(map(lambda e: e[0], db))
+
+# select * where { bob ?x ?y . }
+fail = []
+ret = lambda x: [x]
+
+
+def concat(s):
+    r = []
+    for e in s:
+        r += e
+    return r
+
+
+def filter(p, s):
+    return concat(map(lambda e: ret(e) if p(e) else fail, s))
+
+
+print(filter(lambda x: x[0] == "bob", db))

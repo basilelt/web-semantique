@@ -102,6 +102,16 @@ def map(f, s):
     return r
 
 
+################
+## CONCATENER ##
+################
+def concatener(s):
+    r = []
+    for e in s:
+        r += e
+    return r
+
+
 ############
 ## FILTER ##
 ############
@@ -111,6 +121,7 @@ def filter(p, t):
         if p(e):
             r += [e]
     return r
+
 
 
 if __name__ == "__main__":
@@ -134,3 +145,5 @@ if __name__ == "__main__":
         db_unprefixed += [unprefixe]
 
     print(filter(lambda x: x[0] == "bob", db))
+    
+
