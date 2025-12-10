@@ -31,17 +31,16 @@ for phrase in txt:
         continue
     db += [difference(phrase, sup)]
 
-print(db)
 
-def map(f, set):
+# Compréhensions
+def map(f, s):
     r = []
-    for e in set:
+    for e in s:
         r += [f(e)]
     return r
 
 
-db_prefixed = []
-for e in db:
-    prefixe = map(lambda x: "http://sem.org#" + x, e)
-    db_prefixed += [prefixe]
-print(db_prefixed)
+prefix = map(lambda e: map(lambda x: "http://sem.org#" + x, e), db)
+
+unprefix = map(lambda e: map(lambda x: x.replace("http://sem.org#", ""), e), prefix)
+print(unprefix)
