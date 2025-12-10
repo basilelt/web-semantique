@@ -1,0 +1,65 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX : <http://manger.com#>
+
+select * where {
+	?s rdf:type :base .
+}
+
+select * where {
+	?s rdf:type ?v .
+}
+
+select * where {
+	?prod :prix ?valeur .
+  filter (?valeur > 1.0)
+}
+
+select * where {
+  	:omelette :ingredients ?p .
+	?prod :prix ?prix .
+}
+
+select * where {
+  	:omelette :ingredients/:prix ?prix .
+}
+
+select (sum(?prix) as ?total) where {
+  	:omelette :ingredients/:prix ?prix .
+}
+
+
+insert data {
+  :pb :composition (:poulet :oignon :poivron :jambon :cognac).
+}
+
+select * where {
+  :pb :composition ?quoi.
+}
+
+select distinct * where {
+  :pb :composition/rdf:first ?quoi.
+}
+
+select distinct * where {
+  :pb :composition/rdf:rest/rdf:first ?quoi.
+}
+
+select distinct * where {
+  :pb :composition/rdf:rest/rdf:rest/rdf:first ?quoi.
+}
+
+select distinct * where {
+  :pb :composition/rdf:rest*/rdf:first ?quoi.
+}
+
+select distinct * where {
+  ?quoi :composition/rdf:rest*/rdf:first :oignon .
+}
+
+select distinct * where {{
+  		?quoi :composition/rdf:rest*/rdf:first :oignon .
+	} union {
+		?quoi :composition/rdf:rest*/rdf:first :poivron .
+  	}
+}
