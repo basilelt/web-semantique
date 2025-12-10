@@ -144,6 +144,8 @@ if __name__ == "__main__":
         unprefixe = map(lambda x: x.replace("http://sem.org#", ""), e)
         db_unprefixed += [unprefixe]
 
-    print(filter(lambda x: x[0] == "bob", db))
+    filtered = filter(lambda x: x[0] == "bob", db)
+    
+    
     
 

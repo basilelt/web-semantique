@@ -46,7 +46,6 @@ unprefix = map(lambda e: map(lambda x: x.replace("http://sem.org#", ""), e), pre
 # select ?x where { ?x ?y ?z . }
 # print(map(lambda e: e[0], db))
 
-# select * where { bob ?x ?y . }
 fail = []
 ret = lambda x: [x]
 
@@ -62,4 +61,5 @@ def filter(p, s):
     return concat(map(lambda e: ret(e) if p(e) else fail, s))
 
 
+# select * where { bob ?x ?y . }
 print(filter(lambda x: x[0] == "bob", db))
