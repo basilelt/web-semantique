@@ -132,4 +132,5 @@ if __name__ == "__main__":
     for e in db_prefixed:
         unprefixe = map(lambda x: x.replace("http://sem.org#", ""), e)
         db_unprefixed += [unprefixe]
-    print(db_unprefixed)
+
+    print(filter(lambda x: x[0] == "bob", db))
