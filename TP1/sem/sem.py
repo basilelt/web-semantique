@@ -123,7 +123,6 @@ def filter(p, t):
     return r
 
 
-
 if __name__ == "__main__":
     content = load("data.txt")
     triplets = split(content)
@@ -146,3 +145,28 @@ if __name__ == "__main__":
 
     filtered = filter(lambda x: x[0] == "bob", db)
     filtered = [x for x in db if x[0] == "bob"]
+
+    # [?x, rdf:type, ?y] => [?y, rdf:type, owl:Class] [?x, ?r, ?y]
+    db += [[x[0], "rdf:type", "Person"] for x in db if x[1] == "studies"]
+    db += [[x[0], "rdf:type", "University"] for x in db if x[1] == "located"]
+    db += [[x[2], "rdf:type", "City"] for x in db if x[1] == "located"]
+    
+    # Class
+    db += [[x[2], "rdf:type", "owl:Class"] for x in db if x[1] == "rdf:type"]
+    
+    # ObjectProperty
+    db += [[x[1], "rdf:type", "owl:ObjectProperty"] for x in db if (x[1] != "rdf:type")]
+    
+    # NamedIndividual
+    db += [[x[0], "rdf:type", "owl:NamedIndividual"] for x in db if x[1] == "rdf:type" and x[2] != "owl:Class"]
+
+    # [?x, rdf:type, ?c] => [?r, rdf:domain, ?c]
+    db += [[x[0], "rdf:domain", "Person"] for x in db if x[2] == "owl:ObjectProperty" and x[0] == "studies"]
+    db += [[x[0], "rdf:range", "University"] for x in db if x[2] == "owl:ObjectProperty" and x[0] == "studies"]
+        
+    db += [[x[0], "rdf:domain", "University"] for x in db if x[2] == "owl:ObjectProperty" and x[0] == "located"]
+    db += [[x[0], "rdf:range", "City"] for x in db if x[2] == "owl:ObjectProperty" and x[0] == "located"]
+
+
+    for e in db:
+        print(e)
