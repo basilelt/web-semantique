@@ -145,7 +145,7 @@ if __name__ == "__main__":
         db_unprefixed += [unprefixe]
 
     filtered = filter(lambda x: x[0] == "bob", db)
-    
-    
-    
+    filtered = [x for x in db if x[0] == "bob"]
+
+
 

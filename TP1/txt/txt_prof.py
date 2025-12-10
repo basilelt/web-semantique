@@ -63,3 +63,4 @@ def filter(p, s):
 
 # select * where { bob ?x ?y . }
 print(filter(lambda x: x[0] == "bob", db))
+print([x for x in db if x[0] == "bob"])
