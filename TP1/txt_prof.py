@@ -22,11 +22,13 @@ def union(s1, s2):
     return difference(s1, s2) + s2
 
 
-txt = map(lambda x: x.split(" "), load("data.txt").split("."))
+txt = map(lambda x: x.split(" "), load("data.txt").replace("\n", "").strip().split("."))
 sup = ["is", "at", "the"]
 
 db = []
 for phrase in txt:
+    if phrase == [] or phrase == [""]:
+        continue
     db += [difference(phrase, sup)]
 
 print(db)
