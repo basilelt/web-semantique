@@ -9,8 +9,8 @@ Created on Wed Dec 10 08:00:00 2025
 ##########
 ## LOAD ##
 ##########
-def load(filename):
-    file = open(filename, "r")
+def load(file):
+    file = open(file, "r")
     content = file.read()
     file.close()
     return content
@@ -37,8 +37,8 @@ def join(csv):
 ###########
 ## WRITE ##
 ###########
-def write(filename, txt):
-    file = open(filename, "w")
+def write(file, txt):
+    file = open(file, "w")
     file.write(txt)
     file.close()
 
@@ -46,12 +46,45 @@ def write(filename, txt):
 ##############
 ## CONTAINS ##
 ##############
-def contains(ensemble, element):
-    for i in range(len(ensemble)):
-        for j in range(len(ensemble[i])):
-            if ensemble[i][j] == element:
+def contains(s, e):
+    for i in range(len(s)):
+        for j in range(len(s[i])):
+            if s[i][j] == e:
                 return True
     return False
+
+
+##################
+## INTERSECTION ##
+##################
+def intersection(s1, s2):
+    inter = []
+    for i in s1:
+        if i in s2:
+            inter.append(i)
+    return inter
+
+
+################
+## DIFFERENCE ##
+################
+def difference(s1, s2):
+    diff = []
+    for i in s1:
+        if not i in s2:
+            diff.append(i)
+    return diff
+
+
+###########
+## UNION ##
+###########
+def union(s1, s2):
+    uni = list(s1)
+    for i in s2:
+        if not i in uni:
+            uni.append(i)
+    return uni
 
 
 if __name__ == "__main__":
@@ -74,3 +107,15 @@ if __name__ == "__main__":
     # Contains
     print(contains(csv, "ensisa"))  # True
     print(contains(csv, "uha"))  # False
+
+
+    # Intersection
+    print(intersection(range(1, 10), range(5, 15)))
+    
+    # Difference
+    print(difference(range(1, 10), range(5, 15)))
+    
+    # Union
+    print(union(range(1, 10), range(5, 15)))
+    
+    
